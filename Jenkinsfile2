@@ -1,0 +1,68 @@
+pipeline {
+     agent {
+        label 'TestnodePHP' // Use the label for TestnodePHP node
+    }
+
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('Docker_Hub')  // Your Docker Hub credentials stored in Jenkins
+    }
+
+    stages {
+        stage('Docker Login') {
+            steps {
+                echo "Logging into Docker Hub"
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+        }
+
+        stage('Build & Push Docker Image') {
+            steps {
+                echo "Building and pushing Docker image"
+                sh '''
+                    docker stop laravel-container || true
+                    docker rm laravel-container || true
+                    docker rmi bassam2080/laravel-php || true
+                    docker build -t bassam2080/laravel-php .
+                    docker-compose up -d 
+                    docker push bassam2080/laravel-php
+                '''
+            }
+        }
+stage('Prepare Environment') {
+            steps {
+                echo 'Pulling the Docker image with PHP and PHPUnit'
+                sh '''
+                    docker pull bassam2080/my-docker-php8-phpunit-image
+                '''
+            }
+        }
+        stage('Test Database Connection') {
+            steps {
+                echo "Running Database Connection Test"
+                
+                // Ensure PHP and PHPUnit are accessible
+                sh 'php -v'
+                sh 'phpunit --version'
+                
+                // Run the PHPUnit test specifically for the database connection
+                sh 'vendor/bin/phpunit --filter DbConnectionTest'
+            }
+        }
+
+        stage('Clean') {
+            steps {
+                echo "Cleaning up Docker resources"
+                sh 'docker-compose down'  // Stop and remove any Docker containers started with docker-compose
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build and Test completed successfully!'
+        }
+        failure {
+            echo 'Build or Test failed. Check the logs for details.'
+        }
+    }
+}
