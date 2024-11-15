@@ -13,7 +13,7 @@ pipeline {
         stage('Build & push Dockerfile') {
             steps {
                   sh '''
-		       sh 'chmod +x /var/jenkins_home/workspace/new-laravel-pipeline@tmp/durable-b7266d13/script.sh.copy
+		       chmod +x /var/jenkins_home/workspace/new-laravel-pipeline@tmp/durable-b7266d13/script.sh.copy
 
 		        docker stop laravel-container || true
 		        docker rm laravel-container || true
