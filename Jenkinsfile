@@ -17,10 +17,10 @@ pipeline {
 
 		        docker stop laravel-container || true
 		        docker rm laravel-container || true
-		        docker rmi Yusra8/laravel-php || true
-		        docker build -t Yusra8/laravel-php .
-                docker compose up -d
-		     //   docker push Yusra8/laravel-php
+		        docker rmi st20233418/laravel-php || true
+		        docker build -t st20233418/laravel-php .
+                	docker compose up -d
+		        docker push st20233418/laravel-php
 		        '''
             }
         }
