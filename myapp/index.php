@@ -21,7 +21,7 @@
 	</p>
 </div>
 
-<!-- <?php include("includes/footer.php");
+<?php include("includes/footer.php");
 echo "hello docker3";
 include ("DbConnect.php");
 $db= new Dbconnection();
@@ -34,7 +34,7 @@ $stm->execute();
 $result=$stm->fetchAll(PDO::FETCH_ASSOC);
 echo "<pre>";
 print_r($result);
-echo"</pre>";?> -->
+echo"</pre>";?>
 
 </body>
 </html>
