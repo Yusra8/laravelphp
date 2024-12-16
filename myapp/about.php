@@ -12,7 +12,7 @@
 <div class="container" id="main-content">
 	<h2>About Us</h2>
 	<p> Welcome to the ABOUT PAGE! Welcome to the DevOps WRIT1 assignment. </p>
-	<p>Praesent in rhoncus nisi. Aliquam condimentum mauris in volutpat sodales. Mauris tempus aliquam pharetra. Nunc hendrerit aliquam mauris id tempor. Nam nec tellus at dui condimentum maximus. Ut congue ex a velit elementum fringilla. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum vulputate eros nec lobortis condimentum. Curabitur consectetur lorem ante, ut euismod risus egestas id.</p>
+	<p> This page is to let you understand a bit about myself and the aim of this project. The aim of this project is to successfully apply DevOps concepts onto this program. For example, using version contorl to manage and track changes of this website - this will be achieved by using GitHub.</p>
 </div>
 
 <?php include("includes/footer.php");?>
